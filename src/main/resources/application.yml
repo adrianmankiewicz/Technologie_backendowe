@@ -4,6 +4,10 @@ spring:
     driver-class-name: "org.h2.Driver"
     username: "sa"
     password: "password"
+  profiles:
+    active: loadInitialData
   h2:
     console:
       enabled: true
+server:
+  port: 1337
