@@ -45,5 +45,13 @@ public class User {
         this.email = email;
     }
 
+    // wylistowanie podstawowych informacji o wszystkich użytkownikach zapisanych w systemie (tylko ID oraz nazwa uzytkownika)
+    public String getBasicInfo() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                '}';
+    }
 }
 

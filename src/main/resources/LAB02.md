@@ -1,7 +1,7 @@
 # LABORATORIUM 02
 
 Zadania proszę realizować zgodnie z własnym tempem. Zadania mają pomóc w przygotowaniu do Egzaminu oraz zrozumieniu Frameworka Spring.
-Termin upływa na 7 dni po rozpoczęciu laboratorium.
+Termin upływa na 14 dni po rozpoczęciu laboratorium.
 
 ## ZADANIE 1. Sieciowe API do operacji typu CRUD na klientach
 
