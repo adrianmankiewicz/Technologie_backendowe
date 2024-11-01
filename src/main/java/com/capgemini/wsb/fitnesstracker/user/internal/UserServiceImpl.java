@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,8 +38,37 @@ class UserServiceImpl implements UserService, UserProvider {
     }
 
     @Override
+    public List<User> getUsersByEmailPartial(final String email) {
+        return userRepository.findByEmailPartial(email);
+    }
+
+    @Override
+    public List<User> getUsersOlderThan(LocalDate time)
+    {
+        return userRepository.findUsersOlderThan(time);
+    }
+
+    @Override
     public List<User> findAllUsers() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public User deleteUser(final Long userId) {
+        log.info("Deleting User with ID {}", userId);
+        User user = userRepository.findById(userId)
+                                 .orElseThrow(() -> new IllegalArgumentException("User with ID " + userId + " not found"));
+        userRepository.delete(user);
+        return user;
+    }
+
+    @Override
+    public User updateUser(final User user) {
+        log.info("Updating User {}", user);
+        if (user.getId() == null) {
+            throw new IllegalArgumentException("User has no DB ID, create is not permitted!");
+        }
+        return userRepository.save(user);
     }
 
 }
