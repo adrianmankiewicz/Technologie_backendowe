@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 import java.util.Date;
@@ -22,6 +23,7 @@ public class Training {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @Setter
     private User user;
 
     @Column(name = "start_time", nullable = false)
@@ -32,9 +34,11 @@ public class Training {
 
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "activity_type", nullable = false)
+    @Setter
     private ActivityType activityType;
 
     @Column(name = "distance")
+    @Setter
     private double distance;
 
     @Column(name = "average_speed")
@@ -53,5 +57,13 @@ public class Training {
         this.activityType = activityType;
         this.distance = distance;
         this.averageSpeed = averageSpeed;
+    }
+
+    public double getDuration() {
+        return (endTime.getTime() - startTime.getTime()) / 1000.0;
+    }
+
+    public void setDuration(double duration) {
+        endTime = new Date(startTime.getTime() + (long) (duration * 1000));
     }
 }
