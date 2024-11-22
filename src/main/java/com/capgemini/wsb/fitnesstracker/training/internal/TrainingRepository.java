@@ -26,4 +26,11 @@ interface TrainingRepository extends JpaRepository<Training, Long> {
                         .filter(training -> training.getActivityType().equals(activityType))
                         .toList();
     }
+
+    default List<Training> findByUserIdAndMonth(Long userId, LocalDate date) {
+        return findAll().stream()
+                        .filter(training -> training.getUser().getId().equals(userId))
+                        .filter(training -> training.getEndTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().getMonth().equals(date.getMonth()))
+                        .toList();
+    }
 }

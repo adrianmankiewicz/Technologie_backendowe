@@ -70,4 +70,11 @@ public class TrainingServiceImpl implements TrainingProvider {
                 });
     }
 
+    public String generateMonthlyReport(User user, LocalDate month) {
+        List<Training> trainings = trainingRepository.findByUserIdAndMonth(user.getId(), month);
+        int totalTrainings = trainings.size();
+        return "Użytkownik: " + user.getFirstName() + " " + user.getLastName() + "\n" +
+               "Liczba treningów w miesiącu " + month.getMonth() + ": " + totalTrainings;
+    }
+
 }
